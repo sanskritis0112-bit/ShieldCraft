@@ -1,0 +1,39 @@
+{
+  "services": {
+    "frontend": {
+      "root": ".",
+      "framework": "nextjs"
+    },
+    "ai": {
+      "root": "services/ai",
+      "entrypoint": "main:app"
+    },
+    "api": {
+      "root": "services/api",
+      "entrypoint": "src/index.js"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/api(/.*)?",
+      "destination": {
+        "type": "service",
+        "service": "api"
+      }
+    },
+    {
+      "source": "/api/ai(/.*)?",
+      "destination": {
+        "type": "service",
+        "service": "ai"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "frontend"
+      }
+    }
+  ]
+}
